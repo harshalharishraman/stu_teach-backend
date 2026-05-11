@@ -1,0 +1,16 @@
+require("dotenv").config();
+module.exports={
+  client:'pg',
+
+  connection:{
+    host: '127.0.0.1',
+    user: 'postgres',
+    password: process.env.pwd,
+    database: process.env.db,
+  },
+
+  migrations: {
+    tableName: 'knex_migs',
+    directory: './mig',
+  },
+};
