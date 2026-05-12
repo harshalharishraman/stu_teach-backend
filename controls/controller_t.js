@@ -9,6 +9,8 @@ const {name,email,password}=req.body;
 if(!name || !email || !password){
 return res.status(400).json(new re(null,400,'all fields are required'))
 }
+const v=require('../valid');
+v.ver(req,res);
 const ck=await m.if_t_exist(email);
 if(ck){
     return res.status(409).
@@ -20,5 +22,35 @@ res.status(201).json(new re(null,201,`teacher account created using ${email}`))
     return res.status(500).json(new re(null,500,`internal server issue`))
 }
 }
+
+static async l_tacc(req,res){
+    try{
+        console.log('test 2')
+const {name,email,password}=req.body;
+if(!name || !email || !password){
+return res.status(400).json(new re(null,400,'all fields are required'))
 }
+console.log('test 3')
+//const v=require('../valid');
+//v.ver(req,res);
+console.log('test 4')
+const ck=await m.if_t_exist(email);
+
+if(!ck){
+   return res.status(500).json(new re(null,500,`invalid credential`)) 
+}
+
+const cr=await m.login_teach_acc(name,email,password);
+
+//-----------------------------------
+if(cr){
+res.status(201).json(new re(null,200,`logged into account using ${email}`))}
+else{
+    res.status(500).json(new re(null,500,`incorrect credentials`));
+}}
+catch(error){
+    return res.status(500).json(new re(null,500,`internal server issue`))
+}
+}}
+
 module.exports=control_panelt
