@@ -14,3 +14,5 @@ module.exports={
     directory: './mig',
   },
 };
+
+// npx knex migrate:make create_users_table
