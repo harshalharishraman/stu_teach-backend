@@ -1,4 +1,5 @@
 const exp = require('express');
+
 const c=require('../controls/controller');
 
 const router = exp.Router();
