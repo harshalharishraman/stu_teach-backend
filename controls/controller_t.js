@@ -31,13 +31,18 @@ if(!name || !email || !password){
 return res.status(400).json(new re(null,400,'all fields are required'))
 }
 console.log('test 3')
-//const v=require('../valid');
-//v.ver(req,res);
+const v=require('../valid');
+console.log('test 3')
+const cv=await v.ver(req,res);
+console.log('test 3')
+if(!cv){
+    return;
+}
 console.log('test 4')
 const ck=await m.if_t_exist(email);
 
 if(!ck){
-   return res.status(500).json(new re(null,500,`invalid credential`)) 
+   return res.status(401).json(new re(null,401,`invalid credential`)) 
 }
 
 const cr=await m.login_teach_acc(name,email,password);
