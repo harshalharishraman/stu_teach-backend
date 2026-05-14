@@ -20,7 +20,8 @@ class control_panelt{
            if(ck){
               return res.status(409).json(new re(null,409,'an account exists with this email'));}
            const enc_p=await enc.hash(password,10);
-           const ac_tk= await jg.acc_t_gen(name,email,enc_p)     
+           const ac_tk= await jg.acc_t_gen(name,email,enc_p)
+           const re_tk= await jg.ref_t_gen(name,email,enc_p)
            const cr=await m.create_teach_acc(name,email,enc_p,ac_tk);
             const d={"sucess":true,"access_token":ac_tk
             }
@@ -51,12 +52,13 @@ if(!ck){
 }
 const enc_p=await enc.hash(password,10);
 const ac_tk= await jg.acc_t_gen(name,email,enc_p)
+const re_tk= await jg.ref_t_gen(name,email,enc_p)
 const cr=await m.login_teach_acc(name,email,password,ac_tk);
 
 //-----------------------------------
 if(cr){
 
-    res.status(201).json(new re({"access token":ac_tk},200,`logged into account using ${email}`))}
+    res.status(201).json(new re({"access token":ac_tk,"refresh token":re_tk},200,`logged into account using ${email}`))}
 else{
     return res.status(500).json(new re(null,500,`incorrect credentials`));
 }}

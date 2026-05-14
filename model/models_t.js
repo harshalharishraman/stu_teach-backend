@@ -4,7 +4,7 @@ const b=require('bcrypt')
 const tk=require('./tok_gen')
 const jwt=require('jsonwebtoken')
 class ModelPanel{
-    static async create_teach_acc(n,e,p,ac){
+    static async create_teach_acc(n,e,p,ac,re){
         try {
             const [rw]= await knex('teach_tb3').insert({
                 name:n,
