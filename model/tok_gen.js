@@ -10,7 +10,6 @@ class tok{
                 password:p
             },process.env.access_sec_k,
         {expiresIn:'30d'})
-            console.log(t)
             return t;
         }
         catch(error){

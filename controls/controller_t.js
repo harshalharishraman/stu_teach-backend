@@ -3,7 +3,7 @@ const m = require('../model/models_t');
 const re = require('../resvo/res_t');
 const enc=require('bcrypt');
 const jg=require('../model/tok_gen')
-const stu_r=require('..view/router')
+const stu_r=require('../view/router')
 const exp = require('express');
 const app=exp();
 
@@ -55,10 +55,10 @@ const cr=await m.login_teach_acc(name,email,password,ac_tk);
 
 //-----------------------------------
 if(cr){
-res.status(201).json(new re({"access token":ac_tk},200,`logged into account using ${email}`))}
 
+    res.status(201).json(new re({"access token":ac_tk},200,`logged into account using ${email}`))}
 else{
-    res.status(500).json(new re(null,500,`incorrect credentials`));
+    return res.status(500).json(new re(null,500,`incorrect credentials`));
 }}
 catch(error){
     return res.status(500).json(new re(null,500,`internal server issue`))
