@@ -1,6 +1,7 @@
 const knexConfig = require("../knexfile");
 const knex = require("knex")(knexConfig);
 const b=require('bcrypt')
+const tk=require('./tok_gen')
 const jwt=require('jsonwebtoken')
 class ModelPanel{
     static async create_teach_acc(n,e,p,ac){
@@ -26,7 +27,7 @@ class ModelPanel{
             throw error
         }
     }
-    static async login_teach_acc(n,e,ep){
+    static async login_teach_acc(n,e,ep,acc_tk){
     try{
         const u=await knex('teach_tb3')
         .where({name:n,email:e})
@@ -44,7 +45,7 @@ class ModelPanel{
         hashed passowrd to original) so we need to use .compare*/
 
         if(ch){
-            return true;
+            return true
         }
 
         return false;

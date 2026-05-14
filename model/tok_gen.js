@@ -19,18 +19,29 @@ class tok{
         }
     }
     static async jwt_verify(req,res,next){
-try {const req_head_auth=req.headers.authorization
+try {
+    
+    const req_head_auth=req.headers.authorization
+
+    //console.log(`${req_head_auth}`)
     if(!req_head_auth){
         return res.status(400).json(null,400,'header missing')
+
     }
-    const acc_tk=req_head_auth.split()[1]
+
+    const acc_tk=req_head_auth.split(" ")[1]
+
     if(!acc_tk){
-        return res.status(400).json(null,400,'token missing')}
+              return res.status(400).json(new re(null,400,'token missing'))
+  
+    }
+
+
     const dec=j.verify(acc_tk,process.env.access_sec_k)
     req.user=dec
     next();  
 } catch (error) {
-    res.status(500).json(new re(null,500,'invalid token'))
+    return res.status(500).json(new re(null,500,'invalid token'))
 }
     }
 
